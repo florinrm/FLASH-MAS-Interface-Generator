@@ -1,7 +1,11 @@
 package expression;
 
+/*
+    exception to be thrown when user specifies a value
+    for element before the type of element (button) was created
+ */
 public class ElementNotCreatedException extends Exception {
-    public ElementNotCreatedException() {
+    ElementNotCreatedException() {
         super("Element was not created");
     }
 
