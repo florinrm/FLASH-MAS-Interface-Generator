@@ -1,13 +1,26 @@
 package expression;
 
-public class Button implements Expression {
+public class Button implements Element {
     private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public String generate() {
-        String result = "<button>";
-        result += "</button>";
+        StringBuilder result = new StringBuilder("<button>\n");
+        Elements.indentLevel++;
 
-        return result;
+        result.append("\t".repeat(Math.max(0, Elements.indentLevel)));
+        result.append(name);
+
+        Elements.indentLevel--;
+        result.append("\n</button>");
+        return result.toString();
     }
 }
