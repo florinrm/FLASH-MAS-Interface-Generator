@@ -16,7 +16,8 @@ public class Button implements Element {
         StringBuilder result = new StringBuilder("<button>\n");
         Elements.indentLevel++;
 
-        result.append("\t".repeat(Math.max(0, Elements.indentLevel)));
+        result.append("\t".repeat(Elements.indentLevel));
+
         result.append(name);
 
         Elements.indentLevel--;
