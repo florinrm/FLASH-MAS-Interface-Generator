@@ -1,0 +1,27 @@
+applications:
+  authentication:
+    serviceVersion: 2.0
+    serviceUrl: https://myapp.corp/auth
+    appEnv: DEV
+    timeoutInMs: 5000
+    enableLog: true
+
+  service1:
+    enableLog: true
+    authRequired: true
+    appEnv: DEV
+    timeoutInMs: 5000
+    serviceUrl: https://myapp.corp/service1
+    serviceName: SomeService1
+    serviceVersion: 1.1
+    serviceNamespace: http://myapp.corp/ns/service1
+
+  service2:
+    enableLog: true
+    authRequired: true
+    appEnv: DEV
+    timeoutInMs: 5000
+    serviceUrl: https://myapp.corp/service2
+    serviceName: SomeService2
+    serviceVersion: 2.0
+    serviceNamespace: http://myapp.corp/ns/service2

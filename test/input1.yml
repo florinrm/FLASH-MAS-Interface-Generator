@@ -1,0 +1,19 @@
+configuration:
+  button1:
+    name: Press here!
+    type: button
+    value: Press here!
+
+  button2:
+    name: Don't press here pls
+    type: button
+    value: Don't press here pls
+
+  button3:
+    name: JUST F PRESS IT
+    type: button
+
+  div:
+    name: first div
+    type: div
+    elements: [{name: button_to_press, type: button, value: don't press plz m8}, {name: no button}]
