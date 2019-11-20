@@ -20,4 +20,14 @@ public class Configuration {
                 "configuration=" + configuration +
                 '}';
     }
+
+    public String generate() {
+        String result = "";
+        for (var element : configuration.entrySet()) {
+            Visitor visitor = new Visitor();
+            element.getValue().accept(visitor);
+            result += visitor.getResult();
+        }
+        return result;
+    }
 }
