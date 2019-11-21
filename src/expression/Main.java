@@ -23,6 +23,9 @@ public class Main {
         Configuration data = yaml.loadAs(input, Configuration.class);
         System.out.println(data);
         System.out.println(yaml.dump(data));
-        System.out.println(data.getConfiguration().get("div").getElements());
+        // System.out.println(data.getConfiguration().get("div").getElements());
+
+        String result = data.generate();
+        System.out.println(result);
     }
 }

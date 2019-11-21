@@ -13,6 +13,9 @@ public class Element {
     // value in element (the name put in button, like "Press!")
     private String value;
 
+    // element text
+    private String text;
+
     // list of elements (example: a div has more elements"
     private List<Element> elements = new ArrayList<>();
 
@@ -48,12 +51,22 @@ public class Element {
         this.elements = elements;
     }
 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     @Override
     public String toString() {
         return "Element{" +
                 "type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", value='" + value + '\'' +
+                ", text='" + text + '\'' +
+                ", elements=" + elements +
                 '}';
     }
 

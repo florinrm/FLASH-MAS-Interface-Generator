@@ -16,3 +16,6 @@ Example for output:
 	press
 </button>
 ```
+
+Brainstorming:
+- maps of maps of (string, element) for inline elements
