@@ -4,13 +4,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Configuration {
-    private Map<String, Element> configuration = new LinkedHashMap<>();
+    private Map<String, InlineBlock> configuration = new LinkedHashMap<>();
 
-    public Map<String, Element> getConfiguration() {
+    public Map<String, InlineBlock> getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(Map<String, Element> configuration) {
+    public void setConfiguration(Map<String, InlineBlock> configuration) {
         this.configuration = configuration;
     }
 
@@ -21,13 +21,25 @@ public class Configuration {
                 '}';
     }
 
-    public String generate() {
-        String result = "";
-        for (var element : configuration.entrySet()) {
-            Visitor visitor = new Visitor();
-            element.getValue().accept(visitor);
-            result += visitor.getResult();
+    public String generateBody() {
+        StringBuilder result = new StringBuilder();
+        for (var line : configuration.entrySet()) {
+            result.append("\t<div>\n");
+            result.append(line.getValue().generateCode());
+            result.append("\t</div>\n");
         }
-        return result;
+        return result.toString();
+    }
+
+    public String generateHTML() {
+        return "<!DOCTYPE html>\n" +
+                "<html lang=\"en\">" +
+                "<head>\n" +
+                "\t<meta charset=\"UTF-8\">" +
+                "\n<title>Page</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                generateBody() +
+                "</body>";
     }
 }

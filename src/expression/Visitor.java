@@ -27,8 +27,17 @@ public class Visitor {
                     .append("\"");
         }
 
-        result.append(">\n");
+        result.append(" ")
+                .append(Types.INLINE_STYLE_PROPERTY)
+                .append(">\n");
+
         indentLevel++;
+
+        if (element.getText() != null) {
+            result.append("\t".repeat(indentLevel))
+                    .append(element.getText())
+                    .append("\n");
+        }
 
         for (var elem : element.getElements()) {
             elem.accept(this);
@@ -48,5 +57,13 @@ public class Visitor {
 
     public void setResult(StringBuilder result) {
         this.result = result;
+    }
+
+    public int getIndentLevel() {
+        return indentLevel;
+    }
+
+    public void setIndentLevel(int indentLevel) {
+        this.indentLevel = indentLevel;
     }
 }

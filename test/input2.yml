@@ -1,0 +1,18 @@
+configuration:
+  inline3: # first line
+    blockElements: # elements from first line
+      button1:
+        type: button
+        value: Press here!
+        text: sucky ducky
+      button2:
+        name: Don't press here pls
+        type: button
+        value: Don't press here pls
+        text: plz presssss
+  inline2: # second line
+    blockElements:
+      button1:
+        name: JUST F PRESS IT!
+        type: button
+        text: JUST PRESS IIIITTT
