@@ -12,4 +12,7 @@ public class Types {
     public static final String UNORDERED_LIST = "unordered list";
     public static final String TABLE = "table";
     public static final String DIV = "div";
+
+    // style elements
+    public static final String INLINE_STYLE_PROPERTY = "style = \"display:inline-block\"";
 }
