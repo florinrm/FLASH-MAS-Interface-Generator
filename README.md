@@ -1,7 +1,7 @@
 # FLASH-MAS Interface Generator
 Generator for a HTML language, following instructions given by user.
 
-Example for input:
+Example for input (YAML file):
 ```yaml
 configuration:
   inline3: # first line
