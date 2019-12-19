@@ -1,0 +1,19 @@
+configuration:
+  - # block
+    name: first div
+    content:
+      - name: button1
+        type: button
+        value: Press here!
+      - name: button2
+        type: button
+        value: Don't press here pls
+      - name: button3
+        name: JUST F PRESS IT
+        type: button
+      - # some smaller block
+        content:
+          - type: text field
+            name: input
+          - type: button
+            text: submit

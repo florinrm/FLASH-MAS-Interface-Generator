@@ -1,0 +1,17 @@
+configuration:
+  - # inline3: # first line
+    - # button1:
+      name: button1
+      type: button
+      value: Press here!
+      text: sucky ducky
+    - # button2:
+      name: button2
+      type: button
+      value: Don't press here pls
+      text: plz presssss
+  - # inline2: # second line
+    - # button1:
+      name: button3
+      type: button
+      text: JUST PRESS IIIITTT

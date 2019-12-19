@@ -1,0 +1,4 @@
+configuration:
+  - [] # first block
+  - [] # second block
+  - [{name: crap}]
