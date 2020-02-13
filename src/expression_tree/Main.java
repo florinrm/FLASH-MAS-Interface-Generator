@@ -22,5 +22,6 @@ public class Main {
         Configuration data = yaml.loadAs(input, Configuration.class);
 
         System.out.println(data.getNode());
+        System.out.println(Generator.generate(data.getNode()));
     }
 }
