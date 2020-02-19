@@ -13,10 +13,14 @@ node:
         - name: button1
           type: button
           text: press it
+          properties:
+            type: submit
         - name: button2
           type: button
         - name: button3
           type: button
+        - name: label1
+          type: label
     - name: child3
       children:
         - name: button1

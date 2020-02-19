@@ -1,15 +1,15 @@
 package expression_tree;
 
-import expression_tree.properties.Property;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Element {
     private String name;
     private List<Element> children = new ArrayList<>();
     private String type = Types.BLOCK;
-    private List<Property> properties = new ArrayList<>();
+    private Map<String, String> properties = new HashMap<>();
     private String text;
 
     public List<Element> getChildren() {
@@ -36,11 +36,11 @@ public class Element {
         this.type = type;
     }
 
-    public List<Property> getProperties() {
+    public Map<String, String> getProperties() {
         return properties;
     }
 
-    public void setProperties(List<Property> properties) {
+    public void setProperties(Map<String, String> properties) {
         this.properties = properties;
     }
 

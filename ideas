@@ -1,3 +1,6 @@
+reprezentare:
+- proprietatile = hashmap de tip nume proprietate + valoare proprietate
+
 input activ:
 - agentul trimite la pagina o cerere (apasarea unui buton) - javascript (inserare cod js?)
 input pasiv:
