@@ -1,11 +1,27 @@
-package expression_tree;
+package expression_tree.generator;
 
-public class Generator {
+import expression_tree.Element;
+import expression_tree.Types;
+
+public class HtmlGenerator {
     private static int indentLevel = 0;
+    private final static String head = "<!DOCTYPE html>\n" +
+            "    <html lang=\"en\">\n" +
+            "    <head>\n" +
+            "        <meta charset=\"UTF-8\">\n" +
+            "    <title>Page</title>\n" +
+            "    </head>\n" +
+            "    <body>";
 
     public static String generate(Element element) {
         StringBuilder result = new StringBuilder();
         String tab = "\t";
+
+        if (indentLevel == 0) {
+            result.append(head).append('\n');
+            indentLevel++;
+        }
+
         switch (element.getType()) {
             case Types.BLOCK:
                 result.append(tab.repeat(indentLevel)).append("<div>\n");
@@ -24,6 +40,12 @@ public class Generator {
                 break;
 
         }
+
+        if (indentLevel == 1) {
+            --indentLevel;
+            result.append("</body>");
+        }
+
         return result.toString();
     }
 }
