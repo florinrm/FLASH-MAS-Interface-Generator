@@ -1,0 +1,24 @@
+node:
+  name: root
+  children:
+    - name: child1
+      type: button
+      children: []
+    - name: button2
+      type: button
+      children: []
+    - name: child2
+      children:
+        - name: button1
+          type: button
+          text: press it
+        - name: button2
+          type: button
+        - name: button3
+          type: button
+    - name: child3
+      children:
+        - name: button1
+          type: button
+        - name: button2
+          type: button

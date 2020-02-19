@@ -35,10 +35,14 @@ public class HtmlGenerator {
             case Types.BUTTON:
                 result.append(tab.repeat(indentLevel)).append("<button>\n");
                 indentLevel++;
+                if (element.getText() != null) {
+                    result.append(tab.repeat(indentLevel)).append(element.getText()).append('\n');
+                }
                 indentLevel--;
                 result.append(tab.repeat(indentLevel)).append("</button>\n");
                 break;
-
+            case Types.LABEL:
+                break;
         }
 
         if (indentLevel == 1) {
