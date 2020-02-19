@@ -1,5 +1,6 @@
 package expression_tree;
 
+import expression_tree.generator.AndroidGenerator;
 import expression_tree.generator.HtmlGenerator;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -9,20 +10,28 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class Main {
+public class PageBuilder {
     public static void main(String[] args) {
+        // building the page
+
         Constructor constructor = new Constructor(Configuration.class);
         Yaml yaml = new Yaml();
 
         InputStream input = null;
         try {
-            input = new FileInputStream(new File("test\\input-tree-2.yaml"));
+            input = new FileInputStream(new File("test\\model\\input-tree-2.yaml"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         Configuration data = yaml.loadAs(input, Configuration.class);
 
-        System.out.println(data.getNode());
-        System.out.println(HtmlGenerator.generate(data.getNode()));
+        // System.out.println(data.getNode());
+        if (data.getPlatformType().equals(Types.HTML)) {
+            var html = HtmlGenerator.generate(data.getNode());
+            System.out.println(html);
+        } else if (data.getPlatformType().equals(Types.ANDROID)) {
+            var android = AndroidGenerator.generate(data.getNode());
+            System.out.println(android);
+        }
     }
 }

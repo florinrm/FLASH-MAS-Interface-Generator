@@ -1,0 +1,6 @@
+input activ:
+- agentul trimite la pagina o cerere (apasarea unui buton) - javascript (inserare cod js?)
+input pasiv:
+- agentul vrea sa preia o informatie de la pagina (el primeste ceva)
+
+ceva intermerdiar intre input (activ / pasiv) si pagina generata
