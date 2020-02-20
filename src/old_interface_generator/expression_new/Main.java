@@ -1,5 +1,4 @@
-package expression;
-
+package old_interface_generator.expression_new;
 
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -13,23 +12,12 @@ public class Main {
 
         InputStream input = null;
         try {
-            input = new FileInputStream(new File("test\\input2.yml"));
+            input = new FileInputStream(new File("test\\test.yaml"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         Configuration data = yaml.loadAs(input, Configuration.class);
-        /*
-        System.out.println(data);
-        System.out.println(yaml.dump(data));
-         */
 
-        String result = data.generateHTML();
-        System.out.println(result);
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("test\\result.html"))) {
-            writer.write(result);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println(data.getConfiguration());
     }
 }

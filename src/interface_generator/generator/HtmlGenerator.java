@@ -1,7 +1,7 @@
-package expression_tree.generator;
+package interface_generator.generator;
 
-import expression_tree.Element;
-import expression_tree.Types;
+import interface_generator.Element;
+import interface_generator.Types;
 
 public class HtmlGenerator {
     private static int indentLevel = 0;

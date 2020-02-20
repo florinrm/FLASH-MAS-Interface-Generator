@@ -1,7 +1,7 @@
-package expression_tree;
+package interface_generator;
 
-import expression_tree.generator.AndroidGenerator;
-import expression_tree.generator.HtmlGenerator;
+import interface_generator.generator.AndroidGenerator;
+import interface_generator.generator.HtmlGenerator;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 

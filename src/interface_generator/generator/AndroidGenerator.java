@@ -1,6 +1,6 @@
-package expression_tree.generator;
+package interface_generator.generator;
 
-import expression_tree.Element;
+import interface_generator.Element;
 
 public class AndroidGenerator {
     private final static String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";

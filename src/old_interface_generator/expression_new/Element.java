@@ -1,4 +1,4 @@
-package expression_new;
+package old_interface_generator.expression_new;
 
 public class Element {
     private String name;

@@ -1,4 +1,4 @@
-package expression_tree;
+package interface_generator;
 
 public class Configuration {
     private String platformType;

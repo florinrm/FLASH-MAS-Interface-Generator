@@ -1,4 +1,4 @@
-package expression_tree;
+package interface_generator;
 
 public class Types {
     public static final String HTML = "html";

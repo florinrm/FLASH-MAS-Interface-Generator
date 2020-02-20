@@ -1,4 +1,4 @@
-package expression_tree;
+package interface_generator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
