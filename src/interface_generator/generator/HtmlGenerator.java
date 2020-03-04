@@ -25,7 +25,7 @@ public class HtmlGenerator {
         return null;
     }
 
-    public static String generate(Element element) {
+    public static String generate(Element element) throws Exception {
         StringBuilder result = new StringBuilder();
         String tab = "\t";
 
@@ -36,39 +36,43 @@ public class HtmlGenerator {
 
         var type = element.getType();
         var elementType = ElementType.valueOfLabel(type);
-        var tag = getTag(elementType);
+        if (elementType != null) {
+            var tag = getTag(elementType);
 
-        if (element.getProperties() == null || element.getProperties().isEmpty()) {
+            if (element.getProperties() == null || element.getProperties().isEmpty()) {
+                result.append(tab.repeat(indentLevel))
+                        .append('<')
+                        .append(tag)
+                        .append(">\n");
+            } else {
+                result.append(tab.repeat(indentLevel))
+                        .append('<')
+                        .append(tag)
+                        .append(' ');
+                for (var pair : element.getProperties().entrySet()) {
+                    result.append(pair.getKey())
+                            .append(" = \"")
+                            .append(pair.getValue())
+                            .append('\"');
+                }
+                result.append(">\n");
+            }
+            indentLevel++;
+            for (var child : element.getChildren()) {
+                result.append(generate(child)).append('\n');
+            }
+            indentLevel--;
             result.append(tab.repeat(indentLevel))
-                    .append('<')
+                    .append("</")
                     .append(tag)
                     .append(">\n");
-        } else {
-            result.append(tab.repeat(indentLevel))
-                    .append('<')
-                    .append(tag)
-                    .append(' ');
-            for (var pair : element.getProperties().entrySet()) {
-                result.append(pair.getKey())
-                        .append(" = \"")
-                        .append(pair.getValue())
-                        .append('\"');
-            }
-            result.append(">\n");
-        }
-        indentLevel++;
-        for (var child : element.getChildren()) {
-            result.append(generate(child)).append('\n');
-        }
-        indentLevel--;
-        result.append(tab.repeat(indentLevel))
-                .append("</")
-                .append(tag)
-                .append(">\n");
 
-        if (indentLevel == 1) {
-            --indentLevel;
-            result.append("</body>");
+            if (indentLevel == 1) {
+                --indentLevel;
+                result.append("</body>");
+            }
+        } else {
+            throw new Exception("Invalid element type");
         }
 
         return result.toString();
