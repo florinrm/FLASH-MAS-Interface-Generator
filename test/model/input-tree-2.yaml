@@ -27,3 +27,5 @@ node:
           type: button
         - name: button2
           type: button
+        - name: forms
+          type: form

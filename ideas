@@ -7,3 +7,16 @@ input pasiv:
 - agentul vrea sa preia o informatie de la pagina (el primeste ceva)
 
 ceva intermerdiar intre input (activ / pasiv) si pagina generata
+
+
+TODO: enums in loc de constante in Types
+
+
+textbox + buton => input activ, produce un event sau un agent wave cu valoare textbox-ului
+- la agent o sa fie un shard care se va ocupa de gui si va baga in event queue eventul rezultat
+
+input pasiv: un spinner - care e valoarea actuala - output-ul e valoarea respectiva
+apare pop-up in functie de interfata
+
+inaltimea 1 - pe linie
+inaltimea 2 - pe coloana

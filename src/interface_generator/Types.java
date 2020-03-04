@@ -9,6 +9,11 @@ public class Types {
     public static final String LABEL = "label";
     public static final String FORM = "form";
 
+
+    public enum Platform {
+        HTML, ANDROID
+    }
+
     // style elements
     public static final String INLINE_STYLE_PROPERTY = "style = \"display:inline-block\"";
 }
