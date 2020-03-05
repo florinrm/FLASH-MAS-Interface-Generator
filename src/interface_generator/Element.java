@@ -1,5 +1,7 @@
 package interface_generator;
 
+import interface_generator.types.ElementType;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.Map;
 public class Element {
     private String name;
     private List<Element> children = new ArrayList<>();
-    private String type = Types.BLOCK;
+    private String type = ElementType.BLOCK.type;
     private Map<String, String> properties = new HashMap<>();
     private String text;
 

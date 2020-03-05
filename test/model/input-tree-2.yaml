@@ -4,10 +4,8 @@ node:
   children:
     - name: child1
       type: button
-      children: []
     - name: button2
       type: button
-      children: []
     - name: child2
       children:
         - name: button1

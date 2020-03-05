@@ -8,7 +8,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import java.io.*;
 
 public class PageBuilder {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         // building the page
 
         Constructor constructor = new Constructor(Configuration.class);
