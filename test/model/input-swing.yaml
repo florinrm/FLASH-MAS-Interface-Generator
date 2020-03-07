@@ -1,0 +1,25 @@
+platformType: desktop
+node:
+  name: root
+  children:
+    - name: child1
+      type: button
+      text: button1
+    - name: child2
+      type: button
+      text: button2
+    - name: child3
+      type: button
+      text: button3
+    - name: block1
+      type: block
+      children:
+        - name: subbutton1
+          type: button
+          text: press
+        - name: label1
+          type: label
+          text: labeeel
+        - name: form1
+          type: form
+          text: foooorm

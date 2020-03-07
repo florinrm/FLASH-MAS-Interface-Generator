@@ -2,6 +2,8 @@ package interface_generator;
 
 import interface_generator.generator.AndroidGenerator;
 import interface_generator.generator.HtmlGenerator;
+import interface_generator.generator.SwingGenerator;
+import interface_generator.types.PlatformType;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
@@ -16,23 +18,34 @@ public class PageBuilder {
 
         InputStream input = null;
         try {
-            input = new FileInputStream(new File("test\\model\\input-tree-2.yaml"));
+            input = new FileInputStream(new File("test\\model\\input-swing.yaml"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         Configuration data = yaml.loadAs(input, Configuration.class);
 
-        // System.out.println(data.getNode());
-        if (data.getPlatformType().equals(Types.HTML)) {
-            var html = HtmlGenerator.generate(data.getNode());
-            System.out.println(html);
-            FileWriter fileWriter = new FileWriter("test\\pages\\page.html");
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-            printWriter.print(html);
-            printWriter.close();
-        } else if (data.getPlatformType().equals(Types.ANDROID)) {
-            var android = AndroidGenerator.generate(data.getNode());
-            System.out.println(android);
+        var platformType = data.getPlatformType();
+        var type = PlatformType.valueOfLabel(platformType);
+
+        if (type != null) {
+            switch (type) {
+                case HTML:
+                    var html = HtmlGenerator.generate(data.getNode());
+                    System.out.println(html);
+                    FileWriter fileWriter = new FileWriter("test\\pages\\page.html");
+                    PrintWriter printWriter = new PrintWriter(fileWriter);
+                    printWriter.print(html);
+                    printWriter.close();
+                    break;
+                case ANDROID:
+                    var android = AndroidGenerator.generate(data.getNode());
+                    System.out.println(android);
+                    break;
+                case DESKTOP:
+                    var frame = SwingGenerator.generateWindow(data.getNode());
+                    frame.setVisible(true);
+                    break;
+            }
         }
     }
 }

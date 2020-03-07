@@ -2,7 +2,8 @@ package interface_generator.types;
 
 public enum PlatformType {
     HTML("html"),
-    ANDROID("android");
+    ANDROID("android"),
+    DESKTOP("desktop");
 
     public final String type;
 
