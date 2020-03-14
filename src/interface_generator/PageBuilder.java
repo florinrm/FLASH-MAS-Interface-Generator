@@ -7,6 +7,7 @@ import interface_generator.types.PlatformType;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
+import javax.swing.*;
 import java.io.*;
 
 public class PageBuilder {
@@ -32,7 +33,7 @@ public class PageBuilder {
                 case HTML:
                     var html = HtmlGenerator.generate(data.getNode());
                     System.out.println(html);
-                    FileWriter fileWriter = new FileWriter("test\\pages\\page.html");
+                    FileWriter fileWriter = new FileWriter("test\\generated-pages\\page.html");
                     PrintWriter printWriter = new PrintWriter(fileWriter);
                     printWriter.print(html);
                     printWriter.close();
@@ -42,6 +43,14 @@ public class PageBuilder {
                     System.out.println(android);
                     break;
                 case DESKTOP:
+                    try {
+                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    } catch (ClassNotFoundException
+                            | InstantiationException
+                            | IllegalAccessException
+                            | UnsupportedLookAndFeelException ex) {
+                        ex.printStackTrace();
+                    }
                     var frame = SwingGenerator.generateWindow(data.getNode());
                     frame.setVisible(true);
                     break;
