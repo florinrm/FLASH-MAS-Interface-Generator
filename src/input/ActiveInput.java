@@ -1,20 +1,16 @@
 package input;
 
-import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpHeaders;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
-import io.vertx.ext.web.handler.TemplateHandler;
-import io.vertx.ext.web.templ.rocker.RockerTemplateEngine;
-import io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine;
 
-import javax.script.ScriptException;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class ActiveInput {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Vertx vertx = Vertx.vertx();
         Router router = Router.router(vertx);
 
@@ -42,6 +38,20 @@ public class ActiveInput {
 
         router.route().handler(BodyHandler.create());
 
+        String htmlContent = "";
+        // TODO: read HTML file and take body
+        Scanner scan = new Scanner(new File("test\\active-input\\active-input-1.html"));
+
+        while (scan.hasNextLine()) {
+            htmlContent += scan.nextLine() + '\n';
+        }
+
+        scan.close();
+
+        String bodyContent = htmlContent.split("<body>")[1].split("</body>")[0];
+        System.out.println(bodyContent);
+
+        /*
         router.route("/").handler(routingContext -> {
             routingContext.response().putHeader("content-type", "text/html").end(
                     "<form action=\"/response\" method=\"post\">\n" +
@@ -54,6 +64,11 @@ public class ActiveInput {
                             "    </div>" +
                             "</form>"
             );
+        });
+         */
+
+        router.route("/").handler(routingContext -> {
+            routingContext.response().putHeader("content-type", "text/html").end(bodyContent);
         });
 
         router.post("/response").handler(ctx -> {
