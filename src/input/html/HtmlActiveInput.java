@@ -1,4 +1,4 @@
-package input;
+package input.html;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpHeaders;
@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class ActiveInput {
+public class HtmlActiveInput {
     public static void main(String[] args) throws FileNotFoundException {
         Vertx vertx = Vertx.vertx();
         Router router = Router.router(vertx);
@@ -38,17 +38,17 @@ public class ActiveInput {
 
         router.route().handler(BodyHandler.create());
 
-        String htmlContent = "";
+        StringBuilder htmlContent = new StringBuilder();
         // TODO: read HTML file and take body
         Scanner scan = new Scanner(new File("test\\active-input\\active-input-1.html"));
 
         while (scan.hasNextLine()) {
-            htmlContent += scan.nextLine() + '\n';
+            htmlContent.append(scan.nextLine()).append('\n');
         }
 
         scan.close();
 
-        String bodyContent = htmlContent.split("<body>")[1].split("</body>")[0];
+        String bodyContent = htmlContent.toString().split("<body>")[1].split("</body>")[0];
         System.out.println(bodyContent);
 
         /*
