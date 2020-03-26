@@ -1,0 +1,10 @@
+platformType: desktop
+node:
+  name: root
+  children:
+    - name: child1
+      type: button
+      text: send to agent
+    - name: form1
+      type: form
+      text: foooorm

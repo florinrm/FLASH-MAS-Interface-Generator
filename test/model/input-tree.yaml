@@ -1,8 +1,8 @@
 node:
-  name: root
+  id: root
   children:
-    - name: child1
+    - id: child1
       type: button
       children: []
-    - name: child2
+    - id: child2
       children: []

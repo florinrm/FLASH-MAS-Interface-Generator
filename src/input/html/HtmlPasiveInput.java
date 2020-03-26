@@ -17,7 +17,6 @@ public class HtmlPasiveInput {
         router.route().handler(BodyHandler.create());
 
         StringBuilder htmlContent = new StringBuilder();
-        // TODO: read HTML file and take body
         Scanner scan = new Scanner(new File("test\\pasive-input\\pasive-input-1.html"));
 
         while (scan.hasNextLine()) {
@@ -27,7 +26,7 @@ public class HtmlPasiveInput {
         scan.close();
 
         String bodyContent = htmlContent.toString().split("<body>")[1].split("</body>")[0];
-        System.out.println(bodyContent);
+        // System.out.println(bodyContent);
 
         router.route("/").handler(routingContext -> {
             routingContext.response().putHeader("content-type", "text/html").end(bodyContent);

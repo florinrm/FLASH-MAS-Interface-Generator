@@ -1,29 +1,29 @@
 platformType: html
 node:
-  name: root
+  id: root
   children:
-    - name: child1
+    - id: child1
       type: button
-    - name: button2
+    - id: button2
       type: button
-    - name: child2
+    - id: child2
       children:
-        - name: button1
+        - id: button1
           type: button
           text: press it
           properties:
             type: submit
-        - name: button2
+        - id: button2
           type: button
-        - name: button3
+        - id: button3
           type: button
-        - name: label1
+        - id: label1
           type: label
-    - name: child3
+    - id: child3
       children:
-        - name: button1
+        - id: button1
           type: button
-        - name: button2
+        - id: button2
           type: button
-        - name: forms
+        - id: forms
           type: form

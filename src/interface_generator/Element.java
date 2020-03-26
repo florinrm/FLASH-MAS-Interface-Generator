@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Element {
-    private String name;
+    private String id;
     private List<Element> children = new ArrayList<>();
     private String type = ElementType.BLOCK.type;
     private Map<String, String> properties = new HashMap<>();
@@ -22,12 +22,12 @@ public class Element {
         this.children = children;
     }
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getType() {
@@ -57,7 +57,7 @@ public class Element {
     @Override
     public String toString() {
         return "Element{" +
-                "name='" + name + '\'' +
+                "name='" + id + '\'' +
                 ", children=" + children +
                 ", type='" + type + '\'' +
                 ", properties=" + properties +

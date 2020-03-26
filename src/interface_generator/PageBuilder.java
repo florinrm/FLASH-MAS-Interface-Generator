@@ -11,15 +11,13 @@ import javax.swing.*;
 import java.io.*;
 
 public class PageBuilder {
-    public static void main(String[] args) throws Exception {
-        // building the page
-
+    public static Object buildPage(String file) throws Exception {
         Constructor constructor = new Constructor(Configuration.class);
         Yaml yaml = new Yaml();
 
         InputStream input = null;
         try {
-            input = new FileInputStream(new File("test\\model\\input-swing.yaml"));
+            input = new FileInputStream(new File(file));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -37,11 +35,11 @@ public class PageBuilder {
                     PrintWriter printWriter = new PrintWriter(fileWriter);
                     printWriter.print(html);
                     printWriter.close();
-                    break;
+                    return null;
                 case ANDROID:
                     var android = AndroidGenerator.generate(data.getNode());
                     System.out.println(android);
-                    break;
+                    return null;
                 case DESKTOP:
                     try {
                         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -53,8 +51,13 @@ public class PageBuilder {
                     }
                     var frame = SwingGenerator.generateWindow(data.getNode());
                     frame.setVisible(true);
-                    break;
+                    return frame;
             }
         }
+        return null;
+    }
+
+    public static void main(String[] args) throws Exception {
+        buildPage(args[0]);
     }
 }
