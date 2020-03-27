@@ -1,6 +1,6 @@
 platformType: desktop
 node:
-  name: root
+  id: root
   children:
     - id: child1
       type: button

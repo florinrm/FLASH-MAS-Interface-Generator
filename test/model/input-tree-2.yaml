@@ -4,7 +4,7 @@ node:
   children:
     - id: child1
       type: button
-    - id: button2
+    - id: button
       type: button
     - id: child2
       children:
@@ -21,9 +21,9 @@ node:
           type: label
     - id: child3
       children:
-        - id: button1
+        - id: button7
           type: button
-        - id: button2
+        - id: button4
           type: button
         - id: forms
           type: form

@@ -51,6 +51,12 @@ public class PageBuilder {
                     }
                     var frame = SwingGenerator.generateWindow(data.getNode());
                     frame.setVisible(true);
+
+                    // the main (window) panel
+                    // System.out.println(frame.getRootPane().getContentPane());
+
+                    // var res = SwingGenerator.getComponentById("", frame);
+
                     return frame;
             }
         }

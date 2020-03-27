@@ -11,16 +11,11 @@ public class SwingGenerator {
         JFrame window = new JFrame();
         window.setSize(new Dimension(600, 600));
         JPanel windowPanel = new JPanel();
-        windowPanel.setLayout(new BoxLayout(windowPanel, BoxLayout.X_AXIS));
-        int x_axis = 0;
+        windowPanel.setLayout(new BoxLayout(windowPanel, BoxLayout.Y_AXIS));
+        // windowPanel.putClientProperty(element.getId(), null);
         if (element.getChildren() != null) {
             for (var child : element.getChildren()) {
                 var panel = generate(child);
-                /*
-                panel.setAlignmentX(x_axis);
-                x_axis += 1000;
-
-                 */
                 windowPanel.add(panel);
             }
         }
@@ -40,6 +35,9 @@ public class SwingGenerator {
                         button.setText(element.getText());
                     }
                     panel.add(button);
+                    panel.putClientProperty(element.getId(), button);
+                    System.out.println(panel.getComponents().length);
+                    System.out.println(panel.getComponents()[0].getClass());
                     break;
                 case LABEL:
                     JLabel label = new JLabel();
@@ -47,29 +45,73 @@ public class SwingGenerator {
                         label.setText(element.getText());
                     }
                     panel.add(label);
+                    panel.putClientProperty(element.getId(), label);
+                    System.out.println(panel.getComponents().length);
+                    System.out.println(panel.getComponents()[0].getClass());
                     break;
                 case FORM:
                     JTextArea form = new JTextArea();
                     if (element.getText() != null) {
                         form.setText(element.getText());
                     }
+
                     // hack for a fixed size of form
                     form.setMaximumSize(new Dimension(100, 40));
                     form.setMinimumSize(new Dimension(100, 40));
+
                     panel.add(form);
+                    panel.putClientProperty(element.getId(), form);
+
+                    System.out.println(panel.getComponents().length);
+                    System.out.println(panel.getComponents()[0].getClass());
                     break;
                 case BLOCK:
                     JPanel subPanel = new JPanel();
-                    subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
+                    subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.X_AXIS));
                     if (element.getChildren() != null) {
                         for (var child : element.getChildren()) {
                             subPanel.add(generate(child));
                         }
                     }
                     panel.add(subPanel);
+                    panel.putClientProperty(element.getId(), subPanel);
                     break;
             }
         }
         return panel;
+    }
+
+    public static Object getComponentById(String id, JFrame frame) {
+        var contentPane = frame.getRootPane().getContentPane();
+        if (contentPane instanceof JPanel) {
+            var windowsPanel = (JPanel) contentPane;
+            var mainComponent = windowsPanel.getComponents()[0];
+
+            if (mainComponent instanceof JPanel) {
+                var mainPanel = (JPanel) mainComponent;
+                return getComponentById(id, mainPanel);
+            } else {
+                return null;
+            }
+        }
+
+        return null;
+    }
+
+    // TODO: recursive search
+    private static Object getComponentById(String id, JPanel panel) {
+        var result = panel.getClientProperty(id);
+        if (result != null) {
+            return result;
+        }
+
+        var components = panel.getComponents();
+        for (var component : components) {
+            if (component instanceof JPanel) {
+                return getComponentById(id, (JPanel) component);
+            }
+        }
+
+        return null;
     }
 }

@@ -43,11 +43,16 @@ public class HtmlGenerator {
                 result.append(tab.repeat(indentLevel))
                         .append('<')
                         .append(tag)
-                        .append(">\n");
+                        .append(" id = \"")
+                        .append(element.getId())
+                        .append("\">\n");
             } else {
                 result.append(tab.repeat(indentLevel))
                         .append('<')
                         .append(tag)
+                        .append(" id = \"")
+                        .append(element.getId())
+                        .append("\"")
                         .append(' ');
                 for (var pair : element.getProperties().entrySet()) {
                     result.append(pair.getKey())

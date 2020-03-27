@@ -2,10 +2,7 @@ package interface_generator;
 
 import interface_generator.types.ElementType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Element {
     private String id;
@@ -63,5 +60,22 @@ public class Element {
                 ", properties=" + properties +
                 ", text='" + text + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Element)) return false;
+        Element element = (Element) o;
+        return Objects.equals(id, element.id) &&
+                Objects.equals(children, element.children) &&
+                Objects.equals(type, element.type) &&
+                Objects.equals(properties, element.properties) &&
+                Objects.equals(text, element.text);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, children, type, properties, text);
     }
 }
