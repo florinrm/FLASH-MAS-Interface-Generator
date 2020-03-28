@@ -1,10 +1,9 @@
 platformType: desktop
 node:
-  name: root
+  id: root
   children:
-    - name: child1
+    - id: child1
       type: button
       text: send to agent
-    - name: form1
-      type: form
-      text: foooorm
+    - id: spinner1
+      type: spinner

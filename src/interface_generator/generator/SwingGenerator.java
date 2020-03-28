@@ -44,13 +44,7 @@ public class SwingGenerator {
                         button.setText(element.getId());
                     }
                     panel.add(button);
-                    //componentMap.put(element.getId(), panel);
-
                     panel.putClientProperty(element.getId(), button);
-                    System.out.println(panel.getComponents().length);
-
-                    System.out.println(panel.getComponents()[0].getClass());
-
                     break;
                 case LABEL:
                     JLabel label = new JLabel();
@@ -58,11 +52,7 @@ public class SwingGenerator {
                         label.setText(element.getText());
                     }
                     panel.add(label);
-                    //componentMap.put(element.getId(), panel);
-
                     panel.putClientProperty(element.getId(), label);
-                    System.out.println(panel.getComponents().length);
-                    System.out.println(panel.getComponents()[0].getClass());
                     break;
                 case FORM:
                     JTextArea form = new JTextArea();
@@ -75,11 +65,7 @@ public class SwingGenerator {
                     form.setMinimumSize(new Dimension(100, 40));
 
                     panel.add(form);
-                    //componentMap.put(element.getId(), panel);
-
                     panel.putClientProperty(element.getId(), form);
-                    System.out.println(panel.getComponents().length);
-                    System.out.println(panel.getComponents()[0].getClass());
                     break;
                 case BLOCK:
                     JPanel subPanel = new JPanel();
@@ -90,8 +76,15 @@ public class SwingGenerator {
                         }
                     }
                     panel.add(subPanel);
-                    //componentMap.put(element.getId(), panel);
                     panel.putClientProperty(element.getId(), subPanel);
+                    break;
+                case SPINNER:
+                    JSpinner spinner = new JSpinner();
+                    spinner.setValue(0);
+                    spinner.setMaximumSize(new Dimension(100, 40));
+                    spinner.setMinimumSize(new Dimension(100, 40));
+                    panel.add(spinner);
+                    panel.putClientProperty(element.getId(), spinner);
                     break;
             }
         }
@@ -99,11 +92,9 @@ public class SwingGenerator {
     }
 
     public static Component getComponentById(String id, JFrame frame) {
-        // componentMap.clear();
+        componentMap.clear();
         mapElements(frame);
-
-        var object = componentMap.get(id);
-        return object;
+        return componentMap.get(id);
     }
 
     public static void mapElements(JFrame frame) {
@@ -133,7 +124,6 @@ public class SwingGenerator {
                     }
                 }
                 if (comp instanceof JPanel) {
-                    System.out.println("lelle");
                     map.putAll(mapElements(comp));
                 }
             }

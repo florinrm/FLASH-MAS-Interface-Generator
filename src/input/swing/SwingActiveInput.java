@@ -1,45 +1,33 @@
 package input.swing;
 
 import interface_generator.PageBuilder;
+import interface_generator.generator.SwingGenerator;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SwingActiveInput {
     public static void main(String[] args) throws Exception {
         // creating some demo window for active input
         var page = PageBuilder.buildPage("test/active-input/swing-active-input-1.yaml");
         if (page instanceof JFrame) {
-            var frame = (JFrame) page;
-            frame.setVisible(true);
+            var window = (JFrame) page;
 
-            var mainComponent = frame.getComponents()[0];
-            if (mainComponent instanceof JRootPane) {
-                var rootPanel = (JRootPane) mainComponent;
-                var components = rootPanel.getComponents();
-                for (var component : components) {
-                    // System.out.println(component.getClass());
-                    if (component instanceof JPanel) {
-                        var panel = (JPanel) component;
-                        /*
-                        for (var comps: panel.getComponents()) {
-                            System.out.println(comps.getClass());
+            var element1 = SwingGenerator.getComponentById("form1", window);
+            if (element1 instanceof JTextArea) {
+                var form = (JTextArea) element1;
+                var element2 = SwingGenerator.getComponentById("child1", window);
+                if (element2 instanceof JButton) {
+                    var button = (JButton) element2;
+                    button.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            // text to send to the agent
+                            var text = form.getText();
+                            System.out.println(text);
                         }
-
-                         */
-                    }
-
-                    if (component instanceof JLayeredPane) {
-                        var panel = (JLayeredPane) component;
-                        if (panel.getComponents().length == 1) {
-                            var singleComp = panel.getComponents()[0];
-                            if (singleComp instanceof JPanel) {
-                                var componentPanel = (JPanel) singleComp;
-                                for (var c : componentPanel.getComponents()) {
-                                    System.out.println(c.getClass());
-                                }
-                            }
-                        }
-                    }
+                    });
                 }
             }
         }
