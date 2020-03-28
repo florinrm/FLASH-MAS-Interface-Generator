@@ -10,7 +10,6 @@ node:
       text: button2
     - id: child3
       type: button
-      text: button3
     - id: block1
       type: block
       children:

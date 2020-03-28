@@ -5,14 +5,20 @@ import interface_generator.types.ElementType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class SwingGenerator {
+    public static HashMap<String, Component> componentMap = new HashMap<>();
+    private static HashSet<String> ids = new HashSet<>();
+
     public static JFrame generateWindow(Element element) {
         JFrame window = new JFrame();
         window.setSize(new Dimension(600, 600));
         JPanel windowPanel = new JPanel();
         windowPanel.setLayout(new BoxLayout(windowPanel, BoxLayout.Y_AXIS));
-        // windowPanel.putClientProperty(element.getId(), null);
+        componentMap.put(element.getId(), windowPanel);
+        ids.add(element.getId());
         if (element.getChildren() != null) {
             for (var child : element.getChildren()) {
                 var panel = generate(child);
@@ -23,21 +29,28 @@ public class SwingGenerator {
         return window;
     }
 
-    public static JPanel generate(Element element) {
+    private static JPanel generate(Element element) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         var type = ElementType.valueOfLabel(element.getType());
         if (type != null) {
+            ids.add(element.getId());
             switch (type) {
                 case BUTTON:
                     JButton button = new JButton();
                     if (element.getText() != null) {
                         button.setText(element.getText());
+                    } else {
+                        button.setText(element.getId());
                     }
                     panel.add(button);
+                    //componentMap.put(element.getId(), panel);
+
                     panel.putClientProperty(element.getId(), button);
                     System.out.println(panel.getComponents().length);
+
                     System.out.println(panel.getComponents()[0].getClass());
+
                     break;
                 case LABEL:
                     JLabel label = new JLabel();
@@ -45,6 +58,8 @@ public class SwingGenerator {
                         label.setText(element.getText());
                     }
                     panel.add(label);
+                    //componentMap.put(element.getId(), panel);
+
                     panel.putClientProperty(element.getId(), label);
                     System.out.println(panel.getComponents().length);
                     System.out.println(panel.getComponents()[0].getClass());
@@ -60,8 +75,9 @@ public class SwingGenerator {
                     form.setMinimumSize(new Dimension(100, 40));
 
                     panel.add(form);
-                    panel.putClientProperty(element.getId(), form);
+                    //componentMap.put(element.getId(), panel);
 
+                    panel.putClientProperty(element.getId(), form);
                     System.out.println(panel.getComponents().length);
                     System.out.println(panel.getComponents()[0].getClass());
                     break;
@@ -74,6 +90,7 @@ public class SwingGenerator {
                         }
                     }
                     panel.add(subPanel);
+                    //componentMap.put(element.getId(), panel);
                     panel.putClientProperty(element.getId(), subPanel);
                     break;
             }
@@ -81,7 +98,15 @@ public class SwingGenerator {
         return panel;
     }
 
-    public static Object getComponentById(String id, JFrame frame) {
+    public static Component getComponentById(String id, JFrame frame) {
+        // componentMap.clear();
+        mapElements(frame);
+
+        var object = componentMap.get(id);
+        return object;
+    }
+
+    public static void mapElements(JFrame frame) {
         var contentPane = frame.getRootPane().getContentPane();
         if (contentPane instanceof JPanel) {
             var windowsPanel = (JPanel) contentPane;
@@ -89,29 +114,30 @@ public class SwingGenerator {
 
             if (mainComponent instanceof JPanel) {
                 var mainPanel = (JPanel) mainComponent;
-                return getComponentById(id, mainPanel);
-            } else {
-                return null;
+                componentMap = mapElements(mainComponent);
             }
         }
-
-        return null;
     }
 
-    // TODO: recursive search
-    private static Object getComponentById(String id, JPanel panel) {
-        var result = panel.getClientProperty(id);
-        if (result != null) {
-            return result;
-        }
-
-        var components = panel.getComponents();
-        for (var component : components) {
-            if (component instanceof JPanel) {
-                return getComponentById(id, (JPanel) component);
+    private static HashMap<String, Component> mapElements(Component component) {
+        HashMap<String, Component> map = new HashMap<>();
+        if (component instanceof JPanel) {
+            var panel = (JPanel) component;
+            for (var comp : panel.getComponents()) {
+                for (var id : ids) {
+                    var obj = panel.getClientProperty(id);
+                    if (obj != null) {
+                        if (obj instanceof Component) {
+                            map.put(id, (Component) obj);
+                        }
+                    }
+                }
+                if (comp instanceof JPanel) {
+                    System.out.println("lelle");
+                    map.putAll(mapElements(comp));
+                }
             }
         }
-
-        return null;
+        return map;
     }
 }
