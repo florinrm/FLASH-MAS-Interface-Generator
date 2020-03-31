@@ -5,22 +5,13 @@ import interface_generator.generator.HtmlGenerator;
 import interface_generator.generator.SwingGenerator;
 import interface_generator.types.PlatformType;
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
 
 import javax.swing.*;
 import java.io.*;
 
 public class PageBuilder {
-    public static Object buildPage(String file) throws Exception {
-        Constructor constructor = new Constructor(Configuration.class);
+    public static Object buildPage(InputStream input) throws Exception {
         Yaml yaml = new Yaml();
-
-        InputStream input = null;
-        try {
-            input = new FileInputStream(new File(file));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
         Configuration data = yaml.loadAs(input, Configuration.class);
 
         var platformType = data.getPlatformType();
@@ -57,7 +48,21 @@ public class PageBuilder {
         return null;
     }
 
+    public static InputStream buildPageFile(String path) {
+        InputStream input = null;
+        try {
+            input = new FileInputStream(new File(path));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return input;
+    }
+
+
     public static void main(String[] args) throws Exception {
-        buildPage(args[0]);
+        var file = buildPageFile(args[0]);
+        if (file != null) {
+            buildPage(file);
+        }
     }
 }
